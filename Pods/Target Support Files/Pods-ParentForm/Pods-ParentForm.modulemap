@@ -1,0 +1,6 @@
+framework module Pods_ParentForm {
+  umbrella header "Pods-ParentForm-umbrella.h"
+
+  export *
+  module * { export * }
+}
