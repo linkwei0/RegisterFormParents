@@ -32,6 +32,8 @@ class FormCell: UITableViewCell {
     
     func configure(with viewModel: FormCellViewModel) {
         self.viewModel = viewModel
+        nameCell.userDataTextField.text = viewModel.child.name
+        ageCell.userDataTextField.text = viewModel.child.age
     }
     
     // MARK: - Setup
@@ -44,6 +46,7 @@ class FormCell: UITableViewCell {
     
     private func setupNameCell() {
         contentView.addSubview(nameCell)
+        nameCell.userDataTextField.delegate = self
         nameCell.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16)
             make.left.equalToSuperview().inset(16)
@@ -54,6 +57,7 @@ class FormCell: UITableViewCell {
     
     private func setupAgeCell() {
         contentView.addSubview(ageCell)
+        ageCell.userDataTextField.delegate = self
         ageCell.snp.makeConstraints { make in
             make.top.equalTo(nameCell.snp.bottom).offset(16)
             make.left.equalToSuperview().inset(16)
@@ -77,5 +81,16 @@ class FormCell: UITableViewCell {
 
     @objc private func didTapDeleteChild() {
         viewModel?.didTapDeleteButton()
+    }
+}
+
+extension FormCell: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        viewModel?.nameDidChange(text: textField.text ?? "")
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

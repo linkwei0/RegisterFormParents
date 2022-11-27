@@ -9,6 +9,7 @@ import Foundation
 
 protocol FormCellViewModelDelegate: AnyObject {
     func formCellViewModelDidRequestToDeleteChild(_ viewModel: FormCellViewModel)
+    func formCellViewModelDidRequestToChangeChildName(_ viewModel: FormCellViewModel)
 }
 
 class FormCellViewModel {
@@ -28,5 +29,10 @@ class FormCellViewModel {
     
     func didTapDeleteButton() {
         delegate?.formCellViewModelDidRequestToDeleteChild(self)
+    }
+    
+    func nameDidChange(text: String) {
+        child.name = text
+        delegate?.formCellViewModelDidRequestToChangeChildName(self)
     }
 }

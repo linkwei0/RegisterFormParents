@@ -8,6 +8,7 @@
 import Foundation
 
 struct Child: Equatable {
-    let name: String
-    let age: String
+    var name: String
+    var age: String
+    let date: Date
 }

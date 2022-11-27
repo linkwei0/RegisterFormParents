@@ -12,8 +12,7 @@ final class FormViewController: BaseViewController {
     private let parentView = FormParentView()
     private let childrenCountLabel = UILabel()
     private let addChildButton = UIButton(type: .system)
-    private let tableView = UITableView()
-    private let clearButton = UIButton(type: .system)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
     
     private let viewModel: FormViewModel
     
@@ -34,6 +33,7 @@ final class FormViewController: BaseViewController {
         super.viewDidLoad()
         setup()
         bindToViewModel()
+        notificationCenter()
     }
     
     // MARK: - Setup
@@ -44,7 +44,6 @@ final class FormViewController: BaseViewController {
         setupChildrenCountLabel()
         setupAddChildButton()
         setupTableView()
-        setupClearButton()
     }
     
     private func setupInfoLabel() {
@@ -104,6 +103,9 @@ final class FormViewController: BaseViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.register(FormFooterView.self, forHeaderFooterViewReuseIdentifier: FormFooterView.reuseIdentifier)
         tableView.rowHeight = 200
         tableView.register(FormCell.self, forCellReuseIdentifier: FormCell.reuseIdentifier)
         tableView.snp.makeConstraints { make in
@@ -112,30 +114,33 @@ final class FormViewController: BaseViewController {
         }
     }
     
-    private func setupClearButton() {
-        view.addSubview(clearButton)
-        clearButton.layer.borderWidth = 2.5
-        clearButton.layer.borderColor = UIColor.red.cgColor
-        clearButton.layer.cornerRadius = 24
-        clearButton.setTitle("Очистить", for: .normal)
-        clearButton.setTitleColor(.red, for: .normal)
-        clearButton.backgroundColor = .white
-        clearButton.addTarget(self, action: #selector(didTapClearChildren), for: .touchUpInside)
-        clearButton.titleLabel?.textAlignment = .center
-        clearButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(64)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(32)
-            make.height.equalTo(50)
-        }
+    // MARK: - Notification Center
+    
+    private func notificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - Actions
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let newFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: newFrame.height, right: 0)
+            tableView.contentInset = insets
+            tableView.scrollIndicatorInsets = insets
+        }
+    }
+    
+    @objc private func keyboardWillHide() {
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
     
     @objc private func didTapAddChild() {
         viewModel.addChild()
     }
     
-    @objc private func didTapClearChildren() {
+    @objc private func didTapDeleteData() {
         let actionSheet = UIAlertController(title: "Очистить?", message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Сбросить данные", style: .default, handler: { [weak self] _ in
             self?.parentView.nameCell.userDataTextField.text = nil
@@ -146,6 +151,10 @@ final class FormViewController: BaseViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     // MARK: Bind
     
     private func bindToViewModel() {
@@ -153,9 +162,20 @@ final class FormViewController: BaseViewController {
             self?.tableView.reloadData()
         }
         
+        viewModel.deleteData = { [weak self] in
+            self?.didTapDeleteData()
+        }
+        
         viewModel.updateAddButton = { [weak self] flag in
             self?.addChildButton.isHidden = flag
         }
+    }
+    
+    // MARK: - Deinit
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
@@ -178,6 +198,12 @@ extension FormViewController: UITableViewDataSource {
 
 extension FormViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        let footerView = FormFooterView()
+        footerView.configure(with: viewModel.footerViewModel)
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 60
     }
 }

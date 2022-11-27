@@ -21,6 +21,6 @@ class MainCoordinator: Coordinator {
     }
     
     private func showFormScreen(animated: Bool) {
-        let coordinator = show(FormCoordinator.self, animated: animated)
+        show(FormCoordinator.self, animated: animated)
     }
 }

@@ -11,9 +11,16 @@ final class FormViewModel {
     // MARK: - Properties
     
     var updateData: (() -> Void)?
+    var deleteData: (() -> Void)?
     var updateAddButton: ((_ flag: Bool) -> Void)?
     
+    private(set) var footerViewModel = FormFooterViewModel()
     private var children: [Child] = []
+    private var cellViewModels: [FormCellViewModel] = []
+    
+    init() {
+        footerViewModel.delegate = self
+    }
     
     // MARK: - Public methods
     
@@ -29,7 +36,7 @@ final class FormViewModel {
     
     func addChild() {
         if children.count < 5 {
-            let child = Child(name: "Test Name", age: "Test Age")
+            let child = Child(name: "", age: "", date: Date())
             children.append(child)
             children.count == 5 ? updateAddButton?(true) : updateAddButton?(false)
             updateData?()
@@ -48,13 +55,30 @@ final class FormViewModel {
 // MARK: - FormCellViewModelDelegate
 
 extension FormViewModel: FormCellViewModelDelegate {
+    func formCellViewModelDidRequestToChangeChildName(_ viewModel: FormCellViewModel) {
+        if let index = children.firstIndex(where: { child in
+            child.date == viewModel.child.date
+        }) {
+            children[index].name = viewModel.child.name
+        }
+        children.count == 5 ? updateAddButton?(true) : updateAddButton?(false)
+    }
+    
     func formCellViewModelDidRequestToDeleteChild(_ viewModel: FormCellViewModel) {
         if let index = children.firstIndex(where: { child in
-            child == viewModel.child
+            child.date == viewModel.child.date
         }) {
             children.remove(at: index)
         }
         updateData?()
         children.count == 5 ? updateAddButton?(true) : updateAddButton?(false)
+    }
+}
+
+// MARK: - FormFooterViewModelDelegate
+
+extension FormViewModel: FormFooterViewModelDelegate {
+    func viewModelDidRequestToDeleteData(_ viewModel: FormFooterViewModel) {
+        deleteData?()
     }
 }
