@@ -9,7 +9,7 @@ final class FormViewController: BaseViewController {
     // MARK: - Properties
     
     private let infoLabel = UILabel()
-    private let parentView = FormParentView()
+    private let parentFormView = ParentFormView()
     private let childrenCountLabel = UILabel()
     private let addChildButton = UIButton(type: .system)
     private let tableView = UITableView(frame: .zero, style: .grouped)
@@ -20,6 +20,7 @@ final class FormViewController: BaseViewController {
     
     init(viewModel: FormViewModel) {
         self.viewModel = viewModel
+        self.parentFormView.viewModel = viewModel.parentViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -60,8 +61,8 @@ final class FormViewController: BaseViewController {
     }
     
     private func setupParentView() {
-        view.addSubview(parentView)
-        parentView.snp.makeConstraints { make in
+        view.addSubview(parentFormView)
+        parentFormView.snp.makeConstraints { make in
             make.top.equalTo(infoLabel.snp.bottom).offset(32)
             make.left.right.equalToSuperview().inset(16)
             make.height.equalTo(200)
@@ -76,7 +77,7 @@ final class FormViewController: BaseViewController {
         childrenCountLabel.numberOfLines = 0
         childrenCountLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 19.0)
         childrenCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(parentView.snp.bottom).offset(12)
+            make.top.equalTo(parentFormView.snp.bottom).offset(12)
             make.left.equalToSuperview().inset(16)
         }
     }
@@ -107,7 +108,7 @@ final class FormViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.register(FormFooterView.self, forHeaderFooterViewReuseIdentifier: FormFooterView.reuseIdentifier)
         tableView.rowHeight = 200
-        tableView.register(FormCell.self, forCellReuseIdentifier: FormCell.reuseIdentifier)
+        tableView.register(FormChildrenCell.self, forCellReuseIdentifier: FormChildrenCell.reuseIdentifier)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(childrenCountLabel.snp.bottom).offset(16)
             make.left.right.bottom.equalToSuperview()
@@ -143,9 +144,7 @@ final class FormViewController: BaseViewController {
     @objc private func didTapDeleteData() {
         let actionSheet = UIAlertController(title: "Очистить?", message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Сбросить данные", style: .default, handler: { [weak self] _ in
-            self?.parentView.nameCell.userDataTextField.text = nil
-            self?.parentView.ageCell.userDataTextField.text = nil
-            self?.viewModel.clearChildren()
+            self?.viewModel.removeAllChildren()
         }))
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         present(actionSheet, animated: true, completion: nil)
@@ -159,7 +158,9 @@ final class FormViewController: BaseViewController {
     
     private func bindToViewModel() {
         viewModel.updateData = { [weak self] in
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
         }
         
         viewModel.deleteData = { [weak self] in
@@ -187,9 +188,9 @@ extension FormViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FormCell.reuseIdentifier,
-                                                       for: indexPath) as? FormCell else { return UITableViewCell() }
-        cell.configure(with: viewModel.cellDefinition(indexPath: indexPath))
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FormChildrenCell.reuseIdentifier,
+                                                       for: indexPath) as? FormChildrenCell else { return UITableViewCell() }
+        cell.configure(with: viewModel.configureCellViewModel(with: indexPath))
         return cell
     }
 }

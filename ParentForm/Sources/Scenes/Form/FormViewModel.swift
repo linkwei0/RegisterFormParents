@@ -15,8 +15,12 @@ final class FormViewModel {
     var updateAddButton: ((_ flag: Bool) -> Void)?
     
     private(set) var footerViewModel = FormFooterViewModel()
+    
     private var children: [Child] = []
-    private var cellViewModels: [FormCellViewModel] = []
+    
+    var parentViewModel = ParentViewViewModel()
+        
+    // MARK: - Init
     
     init() {
         footerViewModel.delegate = self
@@ -28,8 +32,8 @@ final class FormViewModel {
         return children.count
     }
     
-    func cellDefinition(indexPath: IndexPath) -> FormCellViewModel {
-        let cellViewModel = FormCellViewModel(child: children[indexPath.row])
+    func configureCellViewModel(with indexPath: IndexPath) -> FormChildrenCellViewModel {
+        let cellViewModel = FormChildrenCellViewModel(child: children[indexPath.row])
         cellViewModel.delegate = self
         return cellViewModel
     }
@@ -45,8 +49,9 @@ final class FormViewModel {
         }
     }
     
-    func clearChildren() {
+    func removeAllChildren() {
         children.removeAll()
+        parentViewModel.clearParentData()
         updateData?()
         updateAddButton?(false)
     }
@@ -54,17 +59,24 @@ final class FormViewModel {
 
 // MARK: - FormCellViewModelDelegate
 
-extension FormViewModel: FormCellViewModelDelegate {
-    func formCellViewModelDidRequestToChangeChildName(_ viewModel: FormCellViewModel) {
+extension FormViewModel: FormChildrenCellViewModelDelegate {
+    func childrenCellViewModelDidRequestToChangeData(_ viewModel: FormChildrenCellViewModel,
+                                                          type: ItemType, child: Child) {
+        
         if let index = children.firstIndex(where: { child in
             child.date == viewModel.child.date
         }) {
-            children[index].name = viewModel.child.name
+            switch type {
+            case .name:
+                children[index].name = viewModel.child.name
+            case .age:
+                children[index].age = viewModel.child.age
+            }
         }
         children.count == 5 ? updateAddButton?(true) : updateAddButton?(false)
     }
     
-    func formCellViewModelDidRequestToDeleteChild(_ viewModel: FormCellViewModel) {
+    func childrenCellViewModelDidRequestToDeleteChild(_ viewModel: FormChildrenCellViewModel) {
         if let index = children.firstIndex(where: { child in
             child.date == viewModel.child.date
         }) {

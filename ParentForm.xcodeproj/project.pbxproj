@@ -15,19 +15,20 @@
 		AD0517652906ADC9001163B6 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517642906ADC9001163B6 /* FormViewController.swift */; };
 		AD0517672906ADE1001163B6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517662906ADE1001163B6 /* BaseViewController.swift */; };
 		AD0517692906AE40001163B6 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517682906AE40001163B6 /* FormViewModel.swift */; };
-		AD05176B2906AF0E001163B6 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05176A2906AF0E001163B6 /* FormCell.swift */; };
+		AD05176B2906AF0E001163B6 /* FormChildrenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05176A2906AF0E001163B6 /* FormChildrenCell.swift */; };
 		AD05176D2906AF5F001163B6 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05176C2906AF5F001163B6 /* ReuseIdentifiable.swift */; };
-		AD05176F2906B192001163B6 /* FormParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05176E2906B192001163B6 /* FormParentView.swift */; };
-		AD0517712906B2AB001163B6 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517702906B2AB001163B6 /* InfoCell.swift */; };
-		AD0517732906B68D001163B6 /* InfoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517722906B68D001163B6 /* InfoCellViewModel.swift */; };
+		AD05176F2906B192001163B6 /* ParentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05176E2906B192001163B6 /* ParentFormView.swift */; };
+		AD0517712906B2AB001163B6 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517702906B2AB001163B6 /* ItemView.swift */; };
 		AD0517752906BB40001163B6 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517742906BB40001163B6 /* Child.swift */; };
-		AD0517782906CD97001163B6 /* FormCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517772906CD97001163B6 /* FormCellViewModel.swift */; };
+		AD0517782906CD97001163B6 /* FormChildrenCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517772906CD97001163B6 /* FormChildrenCellViewModel.swift */; };
 		AD0517812906D30B001163B6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517802906D30B001163B6 /* MainCoordinator.swift */; };
 		AD0517832906D92C001163B6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517822906D92C001163B6 /* Coordinator.swift */; };
 		AD0517852906D9FD001163B6 /* FormCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0517842906D9FD001163B6 /* FormCoordinator.swift */; };
+		AD444D932A4EC7870096D5DC /* ParentViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD444D922A4EC7870096D5DC /* ParentViewViewModel.swift */; };
 		ADBE22C22933A8FC0058FFA3 /* FormFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBE22C12933A8FC0058FFA3 /* FormFooterView.swift */; };
 		ADBE22C42933AA9F0058FFA3 /* FormFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBE22C32933AA9F0058FFA3 /* FormFooterViewModel.swift */; };
 		ADBE22C72933AD5C0058FFA3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBE22C62933AD5C0058FFA3 /* Constants.swift */; };
+		ADFAFD6A2A1E15D7002A9189 /* ItemViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFAFD692A1E15D7002A9189 /* ItemViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,19 +43,20 @@
 		AD0517642906ADC9001163B6 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		AD0517662906ADE1001163B6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		AD0517682906AE40001163B6 /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
-		AD05176A2906AF0E001163B6 /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
+		AD05176A2906AF0E001163B6 /* FormChildrenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChildrenCell.swift; sourceTree = "<group>"; };
 		AD05176C2906AF5F001163B6 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
-		AD05176E2906B192001163B6 /* FormParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormParentView.swift; sourceTree = "<group>"; };
-		AD0517702906B2AB001163B6 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
-		AD0517722906B68D001163B6 /* InfoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCellViewModel.swift; sourceTree = "<group>"; };
+		AD05176E2906B192001163B6 /* ParentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentFormView.swift; sourceTree = "<group>"; };
+		AD0517702906B2AB001163B6 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		AD0517742906BB40001163B6 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
-		AD0517772906CD97001163B6 /* FormCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCellViewModel.swift; sourceTree = "<group>"; };
+		AD0517772906CD97001163B6 /* FormChildrenCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChildrenCellViewModel.swift; sourceTree = "<group>"; };
 		AD0517802906D30B001163B6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AD0517822906D92C001163B6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AD0517842906D9FD001163B6 /* FormCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCoordinator.swift; sourceTree = "<group>"; };
+		AD444D922A4EC7870096D5DC /* ParentViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewViewModel.swift; sourceTree = "<group>"; };
 		ADBE22C12933A8FC0058FFA3 /* FormFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFooterView.swift; sourceTree = "<group>"; };
 		ADBE22C32933AA9F0058FFA3 /* FormFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFooterViewModel.swift; sourceTree = "<group>"; };
 		ADBE22C62933AD5C0058FFA3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ADFAFD692A1E15D7002A9189 /* ItemViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewViewModel.swift; sourceTree = "<group>"; };
 		CA8048A6954F849FC9243AA2 /* Pods_ParentForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParentForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -130,11 +132,10 @@
 			children = (
 				AD0517642906ADC9001163B6 /* FormViewController.swift */,
 				AD0517682906AE40001163B6 /* FormViewModel.swift */,
-				AD05176A2906AF0E001163B6 /* FormCell.swift */,
-				AD0517722906B68D001163B6 /* InfoCellViewModel.swift */,
-				AD0517772906CD97001163B6 /* FormCellViewModel.swift */,
 				AD0517842906D9FD001163B6 /* FormCoordinator.swift */,
-				AD05177E2906D2E0001163B6 /* View */,
+				AD444D942A5052710096D5DC /* ViewModels */,
+				AD05177E2906D2E0001163B6 /* Views */,
+				AD444D952A50529E0096D5DC /* Cells */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -194,15 +195,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		AD05177E2906D2E0001163B6 /* View */ = {
+		AD05177E2906D2E0001163B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				ADBE22C12933A8FC0058FFA3 /* FormFooterView.swift */,
-				AD05176E2906B192001163B6 /* FormParentView.swift */,
-				AD0517702906B2AB001163B6 /* InfoCell.swift */,
+				AD05176E2906B192001163B6 /* ParentFormView.swift */,
+				AD0517702906B2AB001163B6 /* ItemView.swift */,
 				ADBE22C32933AA9F0058FFA3 /* FormFooterViewModel.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		AD05177F2906D301001163B6 /* Main */ = {
@@ -211,6 +212,24 @@
 				AD0517802906D30B001163B6 /* MainCoordinator.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		AD444D942A5052710096D5DC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AD0517772906CD97001163B6 /* FormChildrenCellViewModel.swift */,
+				ADFAFD692A1E15D7002A9189 /* ItemViewViewModel.swift */,
+				AD444D922A4EC7870096D5DC /* ParentViewViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AD444D952A50529E0096D5DC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AD05176A2906AF0E001163B6 /* FormChildrenCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		ADBE22C52933AD3E0058FFA3 /* Common */ = {
@@ -335,23 +354,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD0517732906B68D001163B6 /* InfoCellViewModel.swift in Sources */,
 				AD0517692906AE40001163B6 /* FormViewModel.swift in Sources */,
 				AD0517752906BB40001163B6 /* Child.swift in Sources */,
 				AD0517672906ADE1001163B6 /* BaseViewController.swift in Sources */,
-				AD05176B2906AF0E001163B6 /* FormCell.swift in Sources */,
+				AD05176B2906AF0E001163B6 /* FormChildrenCell.swift in Sources */,
 				AD05174F2906AC68001163B6 /* AppDelegate.swift in Sources */,
 				ADBE22C42933AA9F0058FFA3 /* FormFooterViewModel.swift in Sources */,
 				AD0517852906D9FD001163B6 /* FormCoordinator.swift in Sources */,
 				AD0517832906D92C001163B6 /* Coordinator.swift in Sources */,
-				AD0517782906CD97001163B6 /* FormCellViewModel.swift in Sources */,
+				AD0517782906CD97001163B6 /* FormChildrenCellViewModel.swift in Sources */,
 				AD0517652906ADC9001163B6 /* FormViewController.swift in Sources */,
-				AD05176F2906B192001163B6 /* FormParentView.swift in Sources */,
+				AD05176F2906B192001163B6 /* ParentFormView.swift in Sources */,
 				AD05176D2906AF5F001163B6 /* ReuseIdentifiable.swift in Sources */,
 				AD0517812906D30B001163B6 /* MainCoordinator.swift in Sources */,
 				ADBE22C22933A8FC0058FFA3 /* FormFooterView.swift in Sources */,
+				ADFAFD6A2A1E15D7002A9189 /* ItemViewViewModel.swift in Sources */,
 				AD0517512906AC68001163B6 /* SceneDelegate.swift in Sources */,
-				AD0517712906B2AB001163B6 /* InfoCell.swift in Sources */,
+				AD444D932A4EC7870096D5DC /* ParentViewViewModel.swift in Sources */,
+				AD0517712906B2AB001163B6 /* ItemView.swift in Sources */,
 				ADBE22C72933AD5C0058FFA3 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

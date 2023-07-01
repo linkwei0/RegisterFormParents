@@ -1,5 +1,5 @@
 //
-//  FormCell.swift
+//  FormChildrenCell.swift
 //  ParentForm
 //
 //  Created by Артём Бацанов on 24.10.2022.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-class FormCell: UITableViewCell {
+class FormChildrenCell: UITableViewCell {
     // MARK: - Properties
     
-    private let nameCell = InfoCell(placeholderText: "Имя", placeholderTextField: "Имя")
-    private let ageCell = InfoCell(placeholderText: "Возраст", placeholderTextField: "Возраст")
+    private let nameView = ItemView()
+    private let ageView = ItemView()
     private let deleteButton = UIButton(type: .system)
     
-    private var viewModel: FormCellViewModel?
+    private var viewModel: FormChildrenCellViewModel?
     
     // MARK: - Init
     
@@ -30,10 +30,10 @@ class FormCell: UITableViewCell {
     
     // MARK: Configure
     
-    func configure(with viewModel: FormCellViewModel) {
+    func configure(with viewModel: FormChildrenCellViewModel) {
         self.viewModel = viewModel
-        nameCell.userDataTextField.text = viewModel.child.name
-        ageCell.userDataTextField.text = viewModel.child.age
+        nameView.viewModel = viewModel.configureItemViewModel(.name)
+        ageView.viewModel = viewModel.configureItemViewModel(.age)
     }
     
     // MARK: - Setup
@@ -45,9 +45,8 @@ class FormCell: UITableViewCell {
     }
     
     private func setupNameCell() {
-        contentView.addSubview(nameCell)
-        nameCell.userDataTextField.delegate = self
-        nameCell.snp.makeConstraints { make in
+        contentView.addSubview(nameView)
+        nameView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16)
             make.left.equalToSuperview().inset(16)
             make.height.equalTo(75)
@@ -56,10 +55,9 @@ class FormCell: UITableViewCell {
     }
     
     private func setupAgeCell() {
-        contentView.addSubview(ageCell)
-        ageCell.userDataTextField.delegate = self
-        ageCell.snp.makeConstraints { make in
-            make.top.equalTo(nameCell.snp.bottom).offset(16)
+        contentView.addSubview(ageView)
+        ageView.snp.makeConstraints { make in
+            make.top.equalTo(nameView.snp.bottom).offset(16)
             make.left.equalToSuperview().inset(16)
             make.height.equalTo(75)
             make.width.equalTo(180)
@@ -71,8 +69,8 @@ class FormCell: UITableViewCell {
         deleteButton.setTitle("Удалить", for: .normal)
         deleteButton.addTarget(self, action: #selector(didTapDeleteChild), for: .touchUpInside)
         deleteButton.snp.makeConstraints { make in
-            make.centerY.equalTo(nameCell.snp.centerY)
-            make.left.equalTo(nameCell.snp.right).offset(12)
+            make.centerY.equalTo(nameView.snp.centerY)
+            make.left.equalTo(nameView.snp.right).offset(12)
             make.height.equalTo(40)
         }
     }
@@ -81,16 +79,5 @@ class FormCell: UITableViewCell {
 
     @objc private func didTapDeleteChild() {
         viewModel?.didTapDeleteButton()
-    }
-}
-
-extension FormCell: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        viewModel?.nameDidChange(text: textField.text ?? "")
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }
